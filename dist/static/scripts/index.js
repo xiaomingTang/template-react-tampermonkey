@@ -1,10 +1,10 @@
 
 // ==UserScript==
-// @timestamp    1609067869366
-// @name         keyboard-dir-controller
+// @timestamp    1609068909482
+// @name         template-react-tampermonkey
 // @author       xiaoming
 // @version      1.0.1
-// @description  设置你的自定义方向键
+// @description  modern tampermonkey template
 // @namespace    http://tampermonkey.net/
 
 // @match        https://www.baidu.com/*

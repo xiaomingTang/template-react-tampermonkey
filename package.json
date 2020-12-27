@@ -1,8 +1,8 @@
 {
-  "name": "keyboard-dir-controller",
-  "description": "设置你的自定义方向键",
+  "name": "template-react-tampermonkey",
+  "description": "modern tampermonkey template",
   "version": "1.0.1",
-  "main": "src/index.ts",
+  "main": "src/index.tsx",
   "author": "xiaoming",
   "license": "MIT",
   "browserslist": [
