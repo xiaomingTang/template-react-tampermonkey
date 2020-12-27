@@ -1,16 +1,16 @@
-const webpack = require("webpack")
-const webpackMerge = require("webpack-merge")
+const { merge } = require("webpack-merge")
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 
-const prodConfig = require("./webpack.prod.config")
+const { plugins, ...restConfig } = require("./webpack.prod.config")
 
-const prodWebpackPlugins = (prodConfig.plugins || [])
-
-const devConfig = webpackMerge(prodConfig, {
+const devConfig = merge(restConfig, {
+  // @ts-ignore
   plugins: [
-    ...prodWebpackPlugins,
+    ...plugins,
+    // @ts-ignore
     new BundleAnalyzerPlugin({
-      defaultSizes: "parsed"
+      // treemap sizes 为 parsed 时, bundle 分析页不会展示各项的详细信息
+      // defaultSizes: "parsed"
     })
   ],
 })

@@ -1,12 +1,10 @@
-const webpack = require("webpack")
-const webpackMerge = require("webpack-merge")
+const { HotModuleReplacementPlugin } = require("webpack")
+const { merge } = require("webpack-merge")
 
-const commonConfig = require("./webpack.common.config")
-const Paths = require("./Paths")
+const { plugins = [], ...restConfig } = require("./webpack.common.config")
+const Paths = require("./paths")
 
-const commonWebpackPlugins = (commonConfig.plugins || [])
-
-const devConfig = webpackMerge(commonConfig, {
+const devConfig = merge(restConfig, {
   devServer: {
     contentBase: Paths.Dist,
     // https: true,
@@ -21,8 +19,8 @@ const devConfig = webpackMerge(commonConfig, {
     // quiet: true,
   },
   plugins: [
-    ...commonWebpackPlugins,
-    new webpack.HotModuleReplacementPlugin(),
+    ...plugins,
+    new HotModuleReplacementPlugin(),
   ]
 })
 
