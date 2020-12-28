@@ -3,6 +3,13 @@
 ### description
 让油猴也能用上**typescript** + **react** + **material-ui**
 
+------
+development preview:
+![development preview](dist/static/images/dev.jpg)
+
+------
+production preview:
+![production preview](dist/static/images/prod.jpg)
 ### usage
 ```
 # cmd
