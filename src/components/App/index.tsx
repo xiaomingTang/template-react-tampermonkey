@@ -7,18 +7,18 @@ import {
   useSnackbar,
 } from "notistack"
 
-import { CloseIconButton, geneSnackbarMessage, randomMessageKey } from "@Src/utils/message"
+import { CloseIconButton, SimpleText, randomMessageKey } from "@Src/utils/message"
 
 import Styles from "./index.module.less"
 
-const welcomeStr = "hello tampermonkey"
+const welcome = <SimpleText>{"hello tampermonkey"}</SimpleText>
 const MessageKey = randomMessageKey()
 
 export default function App() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
   const openMessage = useCallback(() => {
-    enqueueSnackbar(geneSnackbarMessage(welcomeStr), {
+    enqueueSnackbar(welcome, {
       key: MessageKey,
       // autoHideDuration: null,
       action: <CloseIconButton onClick={() => closeSnackbar(MessageKey)} />,
@@ -32,12 +32,7 @@ export default function App() {
       color="primary"
       onClick={openMessage}
     >
-      {
-      /**
-       * fontSize must be inherit, or font-size bug occured
-       * 不加 nbsp, Button 会塌陷, 很难看
-       */
-      }
+      {/* 不加 nbsp, Button 会塌陷, 很难看 */}
       &nbsp;<SettingsIcon fontSize="inherit" />&nbsp;
     </Button>
   </>
