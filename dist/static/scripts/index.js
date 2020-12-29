@@ -1,13 +1,13 @@
 
 // ==UserScript==
-// @timestamp    1609224133323
+// @timestamp    1609225544107
 // @name         template-react-tampermonkey
 // @author       xiaoming
 // @version      1.0.1
 // @description  modern tampermonkey template
-// @namespace    http://tampermonkey.net/
+// @namespace    https://www.tampermonkey.net/
 
-// @match        https://www.baidu.com/*
+// @match        http*://*.baidu.com/*
 
 // @require      https://cdn.bootcdn.net/ajax/libs/react/16.14.0/umd/react.production.min.js
 // @require      https://cdn.bootcdn.net/ajax/libs/react-dom/16.14.0/umd/react-dom.production.min.js

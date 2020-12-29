@@ -21,9 +21,9 @@ const prefix = `
 // @author       ${packageJson.author || "tamperscript author"}
 // @version      ${packageJson.version || "1.0.0"}
 // @description  ${packageJson.description || "tamperscript description"}
-// @namespace    http://tampermonkey.net/
+// @namespace    https://www.tampermonkey.net/
 
-// @match        https://www.baidu.com/*
+// @match        http*://*.baidu.com/*
 
 // @require      https://cdn.bootcdn.net/ajax/libs/react/16.14.0/umd/react.production.min.js
 // @require      https://cdn.bootcdn.net/ajax/libs/react-dom/16.14.0/umd/react-dom.production.min.js
