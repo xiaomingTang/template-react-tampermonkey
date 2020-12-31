@@ -1,7 +1,9 @@
 const path = require("path")
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const CopyPlugin = require("copy-first-asset-webpack-plugin").default
+const chalk = require("chalk")
+const clipboardy = require("clipboardy")
+const { InjectStringWebpackPlugin } = require("inject-string-webpack-plugin")
 
 const { resolve, rules } = require("./common-loaders")
 const Paths = require("./paths")
@@ -19,6 +21,8 @@ module.exports = {
   entry: {
     index: path.resolve(Paths.Src, "index.tsx"),
   },
+  // 使输出更精简
+  stats: "errors-warnings",
   // externals 应当在/config/Constants.js文件中声明, 不建议在此修改配置逻辑
   externals: isProduction ? externals : {},
   output: {
@@ -46,10 +50,14 @@ module.exports = {
     new webpack.WatchIgnorePlugin([
       /\.d\.ts$/,
     ]),
-    isProduction ? new CopyPlugin({
+    isProduction ? new InjectStringWebpackPlugin({
+      test: /static[/\\]scripts[/\\]index\..*js/g,
       prefix,
       suffix,
-      copy: true,
+      afterInject: (assetName, asset) => {
+        clipboardy.writeSync(asset.source())
+        console.log(chalk.green("【copied】"))
+      },
     }) : null,
   ].filter(Boolean),
 }

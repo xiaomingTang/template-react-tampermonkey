@@ -30,6 +30,7 @@ const prefix = `
 // @require      https://cdn.bootcdn.net/ajax/libs/material-ui/4.11.2/umd/material-ui.production.min.js
 
 // ==/UserScript==
+
 `
 
 /**
