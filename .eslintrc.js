@@ -17,7 +17,7 @@ module.exports = {
   "plugins": [
     "react-hooks",
   ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,
     "allowImportExportEverywhere": true,
