@@ -23,7 +23,7 @@ const prefix = `
 // @description  ${packageJson.description || "tamperscript description"}
 // @namespace    https://www.tampermonkey.net/
 
-// @match        http*://*.baidu.com/*
+// @match        http*://*.lmoar.com/*
 
 // @require      https://cdn.bootcdn.net/ajax/libs/react/16.14.0/umd/react.production.min.js
 // @require      https://cdn.bootcdn.net/ajax/libs/react-dom/16.14.0/umd/react-dom.production.min.js
