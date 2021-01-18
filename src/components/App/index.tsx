@@ -1,7 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react"
-import { Button } from "@material-ui/core"
+import React, {
+  ChangeEvent, useCallback, useEffect, useState,
+} from "react"
 import {
-  ArrowLeft, ArrowRight,
+  Button, IconButton, InputAdornment, TextField,
+} from "@material-ui/core"
+import {
+  ArrowLeft as ArrowLeftIcon, ArrowRight as ArrowRightIcon, Check as CheckIcon, Settings as SettingsIcon, KeyboardArrowDown as KeyboardArrowDownIcon,
 } from "@material-ui/icons"
 import {
   useSnackbar,
@@ -18,7 +22,7 @@ function joinSpace(...args: string[]) {
   return args.join(" ")
 }
 
-const routeTo = (pageType: string, idx: number, readonly = false) => () => {
+const geneOpenPage = (pageType: string, idx: number, readonly = false) => () => {
   let url = `https://m.lmoar.com/admin/${pageType}/`
   if (idx < 0) {
     url += "new"
@@ -49,7 +53,17 @@ export default function App() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const [pageType, setPageType] = useState("")
   const [curPageIdx, setCurPageIdx] = useState(-1)
+  const [inputPageIdx, setInputPageIdx] = useState(-1)
   const href = useHref()
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
+  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setInputPageIdx(parseInt(e.target.value || "-1", 10))
+  }, [])
+
+  const handleInputEnter = useCallback(() => {
+    geneOpenPage(pageType, inputPageIdx, false)()
+  }, [inputPageIdx, pageType])
 
   const openMessage = useCallback(() => {
     enqueueSnackbar(welcome, {
@@ -58,6 +72,18 @@ export default function App() {
       action: <CloseIconButton onClick={() => closeSnackbar(MessageKey)} />,
     })
   }, [enqueueSnackbar, closeSnackbar])
+
+  // 输入框 inputPageIdx 默认值为 curPageIdx
+  useEffect(() => {
+    if (curPageIdx > 0) {
+      setInputPageIdx((prev) => {
+        if (prev > 0) {
+          return prev
+        }
+        return curPageIdx
+      })
+    }
+  }, [curPageIdx])
 
   // 新建及上一页、下一页按钮
   useEffect(() => {
@@ -93,25 +119,84 @@ export default function App() {
     }
   }, [])
 
-  if (!pageType) {
-    return <></>
+  if (isCollapsed) {
+    return <IconButton className={Styles.mainBtn} onClick={() => {
+      setIsCollapsed(false)
+    }}>
+      <SettingsIcon />
+    </IconButton>
   }
 
+  // if (!pageType) {
+  //   return <></>
+  // }
+
   return <div className={Styles.wrapper}>
+    <Button
+      fullWidth
+      size="small"
+      variant="text"
+      color="primary"
+      onClick={() => {
+        setIsCollapsed(true)
+      }}
+    >
+      <KeyboardArrowDownIcon />
+    </Button>
     <div className={joinSpace(Styles.area, Styles.area1)}>
-      <Button onClick={routeTo(pageType, -1, false)} size="large" className={Styles.button} variant="contained" color="primary">新建</Button>
+      <Button
+        fullWidth
+        variant="contained"
+        color="primary"
+        onClick={geneOpenPage(pageType, -1, false)}
+      >
+        新建
+      </Button>
+    </div>
+    <div className={joinSpace(Styles.area, Styles.area2)}>
+      <TextField
+        className={Styles.removeNumberSpin}
+        label="跳转编辑"
+        type="number"
+        fullWidth
+        margin="dense"
+        size="small"
+        variant="outlined"
+        defaultValue={inputPageIdx <= 0 ? "" : `${inputPageIdx}`}
+        InputProps={{
+          endAdornment: (<InputAdornment position="end">
+            <IconButton onClick={handleInputEnter}>
+              <CheckIcon />
+            </IconButton>
+          </InputAdornment>),
+        }}
+        onChange={handleInputChange}
+        onKeyDown={(e) => {
+          const target = e.target as HTMLInputElement
+          switch (e.key.toLowerCase()) {
+          case "enter":
+            handleInputEnter()
+            break
+          case "escape":
+            target.select()
+            break
+          default:
+            break
+          }
+        }}
+      />
     </div>
     <div className={joinSpace(Styles.area, Styles.area2)}>
       <label className={Styles.label}>编辑: </label>
-      <Button disabled={curPageIdx <= 0} onClick={routeTo(pageType, curPageIdx - 1, false)} size="small" className={Styles.button} variant="contained" color="primary" startIcon={<ArrowLeft />}>上一页</Button>
-      <Button disabled={curPageIdx <= 0} onClick={routeTo(pageType, curPageIdx, false)} size="small" className={Styles.button} variant="outlined" color="primary">当前页</Button>
-      <Button disabled={curPageIdx <= 0} onClick={routeTo(pageType, curPageIdx + 1, false)} size="small" className={Styles.button} variant="contained" color="primary" endIcon={<ArrowRight />}>下一页</Button>
+      <Button disabled={curPageIdx <= 0} onClick={geneOpenPage(pageType, curPageIdx - 1, false)} size="small" className={Styles.ml} variant="contained" color="primary" startIcon={<ArrowLeftIcon />}>上一页</Button>
+      <Button disabled={curPageIdx <= 0} onClick={geneOpenPage(pageType, curPageIdx, false)} size="small" className={Styles.ml} variant="outlined" color="primary">当前页</Button>
+      <Button disabled={curPageIdx <= 0} onClick={geneOpenPage(pageType, curPageIdx + 1, false)} size="small" className={Styles.ml} variant="contained" color="primary" endIcon={<ArrowRightIcon />}>下一页</Button>
     </div>
     <div className={joinSpace(Styles.area, Styles.area3)}>
       <label className={Styles.label}>查看: </label>
-      <Button disabled={curPageIdx <= 0} onClick={routeTo(pageType, curPageIdx - 1, true)} size="small" className={Styles.button} variant="contained" color="primary" startIcon={<ArrowLeft />}>上一页</Button>
-      <Button disabled={curPageIdx <= 0} onClick={routeTo(pageType, curPageIdx, true)} size="small" className={Styles.button} variant="outlined" color="primary">当前页</Button>
-      <Button disabled={curPageIdx <= 0} onClick={routeTo(pageType, curPageIdx + 1, true)} size="small" className={Styles.button} variant="contained" color="primary" endIcon={<ArrowRight />}>下一页</Button>
+      <Button disabled={curPageIdx <= 0} onClick={geneOpenPage(pageType, curPageIdx - 1, true)} size="small" className={Styles.ml} variant="contained" color="primary" startIcon={<ArrowLeftIcon />}>上一页</Button>
+      <Button disabled={curPageIdx <= 0} onClick={geneOpenPage(pageType, curPageIdx, true)} size="small" className={Styles.ml} variant="outlined" color="primary">当前页</Button>
+      <Button disabled={curPageIdx <= 0} onClick={geneOpenPage(pageType, curPageIdx + 1, true)} size="small" className={Styles.ml} variant="contained" color="primary" endIcon={<ArrowRightIcon />}>下一页</Button>
     </div>
   </div>
 }
