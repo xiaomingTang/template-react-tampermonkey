@@ -102,8 +102,8 @@ export default function App() {
 
   // 大屏广告名称自动填充
   useEffect(() => {
-    const nameInput = document.querySelector("#adv_page_name") as HTMLInputElement
-    const orderInput = document.querySelector("#adv_page_position") as HTMLInputElement
+    const nameInput = (document.querySelector("#adv_page_name") || document.querySelector("#car_name")) as HTMLInputElement
+    const orderInput = (document.querySelector("#adv_page_position") || document.querySelector("#car_position")) as HTMLInputElement
     const fileInput = document.querySelector(".qq-upload-button > input[type=file]") as HTMLInputElement
     if (nameInput && orderInput && fileInput) {
       fileInput.addEventListener("change", () => {
@@ -127,9 +127,9 @@ export default function App() {
     </IconButton>
   }
 
-  // if (!pageType) {
-  //   return <></>
-  // }
+  if (process.env.NODE_ENV !== "development" && !pageType) {
+    return <></>
+  }
 
   return <div className={Styles.wrapper}>
     <Button
