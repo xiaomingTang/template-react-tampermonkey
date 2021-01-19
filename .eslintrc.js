@@ -58,5 +58,6 @@ module.exports = {
     "max-len": "off",
     "no-underscore-dangle": "off",
     "@typescript-eslint/no-parameter-properties": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
   }
 }
