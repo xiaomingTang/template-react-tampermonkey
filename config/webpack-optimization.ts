@@ -1,8 +1,8 @@
-const { merge } = require("webpack-merge")
-const TerserPlugin = require("terser-webpack-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+import webpack from "webpack"
+import TerserPlugin from "terser-webpack-plugin"
+import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin"
 
-const webpackOptimization = merge({
+const webpackOptimization: webpack.Options.Optimization = {
   minimizer: [
     new TerserPlugin({
       // exclude: /\.min\.js$/, // 过滤掉以".min.js"结尾的文件，我们认为这个后缀本身就是已经压缩好的代码，没必要进行二次压缩
@@ -33,6 +33,6 @@ const webpackOptimization = merge({
       canPrint: true
     }),
   ],
-})
+}
 
-module.exports = webpackOptimization
+export default webpackOptimization

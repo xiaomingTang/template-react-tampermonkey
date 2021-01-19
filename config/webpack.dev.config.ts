@@ -1,10 +1,10 @@
-const { HotModuleReplacementPlugin } = require("webpack")
-const { merge } = require("webpack-merge")
+import webpack, { HotModuleReplacementPlugin } from "webpack"
+import { merge } from "webpack-merge"
 
-const { plugins = [], ...restConfig } = require("./webpack.common.config")
-const Paths = require("./paths")
+import commonConfig from "./webpack.common.config"
+import Paths from "./paths"
 
-const devConfig = merge(restConfig, {
+const devConfig: webpack.Configuration = merge(commonConfig, {
   devServer: {
     contentBase: Paths.Dist,
     // https: true,
@@ -19,9 +19,8 @@ const devConfig = merge(restConfig, {
     // quiet: true,
   },
   plugins: [
-    ...plugins,
     new HotModuleReplacementPlugin(),
   ]
 })
 
-module.exports = devConfig
+export default devConfig

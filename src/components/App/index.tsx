@@ -1,3 +1,4 @@
+import { hot } from "react-hot-loader/root"
 import React, {
   ChangeEvent, useCallback, useEffect, useState,
 } from "react"
@@ -14,6 +15,7 @@ import {
 import { CloseIconButton, SimpleText, randomMessageKey } from "@Src/utils/message"
 
 import Styles from "./index.module.less"
+import "./lmoar.admin.less"
 
 const welcome = <SimpleText>{"hello tampermonkey"}</SimpleText>
 const MessageKey = randomMessageKey()
@@ -49,7 +51,7 @@ function useHref() {
   return href
 }
 
-export default function App() {
+function App() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const [pageType, setPageType] = useState("")
   const [curPageIdx, setCurPageIdx] = useState(-1)
@@ -65,6 +67,7 @@ export default function App() {
     geneOpenPage(pageType, inputPageIdx, false)()
   }, [inputPageIdx, pageType])
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const openMessage = useCallback(() => {
     enqueueSnackbar(welcome, {
       key: MessageKey,
@@ -89,7 +92,7 @@ export default function App() {
   useEffect(() => {
     // http://m.lmoar.com/admin/show_page/31444
     const url = new URL(href)
-    const [_, adminName, pageName, pageIdx] = url.pathname.split("/")
+    const [, adminName, pageName, pageIdx] = url.pathname.split("/")
     console.log(adminName, pageName)
     if (adminName === "admin" && pageName) {
       setPageType(pageName)
@@ -162,7 +165,7 @@ export default function App() {
         margin="dense"
         size="small"
         variant="outlined"
-        defaultValue={inputPageIdx <= 0 ? "" : `${inputPageIdx}`}
+        autoFocus
         InputProps={{
           endAdornment: (<InputAdornment position="end">
             <IconButton onClick={handleInputEnter}>
@@ -200,3 +203,5 @@ export default function App() {
     </div>
   </div>
 }
+
+export default hot(App)

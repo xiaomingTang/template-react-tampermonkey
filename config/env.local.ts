@@ -1,0 +1,1 @@
+export { envConfig } from "./env"

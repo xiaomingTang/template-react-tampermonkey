@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "outDir": "./dist",
+    "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "module": "ESNext",
     "target": "ESNext",
@@ -15,15 +15,8 @@
     "resolveJsonModule": true,
     "strict": true,
     "paths": {
-      "@Src/*": [ "src/*" ],
-      "@Utils/*": ["src/utils/*"],
-      "@Comps/*": ["src/components/*"],
+      "@Src/*": [ "src/*" ]
     }
   },
-  "include": [ "src/**/*" ],
-  "exclude": [
-    "node_modules/**/*",
-    "config/**/*",
-    "dist/**/*"
-  ]
+  "include": [ "src/**/*" ]
 }
