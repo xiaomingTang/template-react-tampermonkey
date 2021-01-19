@@ -13,7 +13,7 @@ import "./index.less"
 let rootDom: HTMLDivElement
 
 if (process.env.NODE_ENV === "development") {
-  rootDom = document.querySelector("#__tampermonkey__app") as HTMLDivElement
+  rootDom = document.querySelector(process.env.DEV_ROOT_ELEM_SELECTOR) as HTMLDivElement
 } else {
   rootDom = document.createElement("div")
   rootDom.className = Styles.rootDom

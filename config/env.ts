@@ -24,5 +24,5 @@ export interface EnvConfig {
  * ```
  */
 export const envConfig: EnvConfig = {
-  APP_KEY: `PIN_TEXT`,
+  DEV_ROOT_ELEM_SELECTOR: "#__tampermonkey__app",
 }
