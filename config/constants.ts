@@ -1,8 +1,8 @@
 import packageMetaData from "../package.json"
 
-// -----------------------------------
+// -------------------------------------
 // 以下为自定义区, 请根据注释进行自定义配置
-// -----------------------------------
+// -------------------------------------
 
 /**
  * 一. src 中用到的 tampermonkey 内置函数, 均需要在 prefix 中声明 @grant
@@ -14,7 +14,7 @@ import packageMetaData from "../package.json"
  */
 export const prefix = `
 // ==UserScript==
-// @updateTime    ${new Date().toLocaleString()/* 这个参数类似于版本号, 你可以注意该参数, 以证明你确实更新了该脚本 */}
+// @lastUpdate    ${new Date().toLocaleString()/* 这个参数类似于版本号, 你可以注意该参数, 以证明你确实更新了该脚本 */}
 
 // @name         ${packageMetaData.name || "tamperscript name"}
 // @author       ${packageMetaData.author || "tamperscript author"}
@@ -41,9 +41,9 @@ export const externals = {
   "@material-ui/core": "MaterialUI",
 }
 
-// -----------------------------------
+// -------------------------------------
 // 以上即为自定义区
-// -----------------------------------
+// -------------------------------------
 
 export const isProduction = process.env.NODE_ENV !== "development"
 
