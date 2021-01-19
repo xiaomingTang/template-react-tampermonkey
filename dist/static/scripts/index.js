@@ -1,7 +1,7 @@
 
 // ==UserScript==
-// @timestamp    1610962430421
-// @name         template-react-tampermonkey
+// @timestamp    1611055576771
+// @name         lmoar-admin-helper
 // @author       xiaoming
 // @version      1.0.1
 // @description  modern tampermonkey template

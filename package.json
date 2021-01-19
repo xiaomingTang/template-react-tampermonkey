@@ -1,5 +1,5 @@
 {
-  "name": "template-react-tampermonkey",
+  "name": "lmoar-admin-helper",
   "description": "modern tampermonkey template",
   "version": "1.0.1",
   "main": "src/index.tsx",
