@@ -1,3 +1,5 @@
+# 本模板已迁移至 [quick-scaffold](https://github.com/xiaomingTang/quick-scaffold)
+ ---
 # template-react-tampermonkey
 
 ### description
